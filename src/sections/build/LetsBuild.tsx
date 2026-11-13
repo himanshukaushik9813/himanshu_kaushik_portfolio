@@ -15,6 +15,7 @@ import './build.css'
  */
 export function LetsBuild() {
   const rootRef = useRef<HTMLElement>(null)
+  const spacerRef = useRef<HTMLDivElement>(null)
   const last = buildWords.length - 1
 
   useGsap(() => {
@@ -74,6 +75,7 @@ export function LetsBuild() {
       start: 'top top',
       end: () => `+=${Math.round(Math.max(track.scrollWidth - window.innerWidth, window.innerHeight * F) + window.innerHeight * 2.05)}`,
       pin: true,
+      pinSpacer: spacerRef.current, // own wrapper: no DOM move when pinning
       scrub: ScrollTrigger.isTouch ? true : 0.8,
       fastScrollEnd: true,
       anticipatePin: 1,
@@ -84,6 +86,7 @@ export function LetsBuild() {
   }, rootRef)
 
   return (
+    <div ref={spacerRef}>
     <section id="cta" ref={rootRef} className="lets-build" data-section="lets-build" aria-labelledby="lets-build-title">
       <h2 id="lets-build-title" className="sr-only">Let’s build APIs, systems and products</h2>
       <div className="lets-build__window" aria-hidden="true">
@@ -106,5 +109,6 @@ export function LetsBuild() {
         </div>
       </div>
     </section>
+    </div>
   )
 }

@@ -5,7 +5,7 @@
 .about__title { color: var(--stone-950); max-width: 13ch; }
 .about__line { display: block; overflow: hidden; padding-bottom: 0.06em; }
 .about__line > span { display: block; }
-.about__muted { color: var(--stone-400); }
+.about__muted { color: var(--muted-lg); }
 .about__intro { margin-top: clamp(40px, 6vw, 96px); max-width: 30em; font-family: var(--font-body); font-size: var(--t-body-l); line-height: 1.6; color: var(--stone-700); }
 .about__intro strong { color: var(--stone-950); font-weight: 700; }
 .about__resume { display: inline-flex; align-items: center; gap: 8px; margin-top: 32px; border-bottom: 1px solid currentColor; padding-bottom: 4px; align-self: flex-start; }

@@ -1,5 +1,5 @@
 // Reveals animate opacity only (never visibility), so not-yet-revealed links stay keyboard-focusable.
-import { gsap, ScrollTrigger, SplitText } from './gsap'
+import { gsap, ScrollTrigger } from './gsap'
 import { prefersReducedMotion } from './useReducedMotion'
 
 /**
@@ -25,4 +25,4 @@ export function parallax(target: HTMLElement, trigger: HTMLElement, from: gsap.T
   gsap.fromTo(target, from, { ...to, ease: 'none', scrollTrigger: { trigger, start: 'top bottom', end: 'bottom top', scrub } })
 }
 
-export { gsap, ScrollTrigger, SplitText }
+export { gsap, ScrollTrigger }

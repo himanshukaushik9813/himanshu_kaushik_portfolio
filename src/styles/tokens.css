@@ -7,6 +7,10 @@
   --stone-100: #f5f5f4; /* paper / page bg */
   --stone-300: #d6d3d1; /* text on dark, secondary */
   --stone-400: #a8a29e; /* muted (large/decorative text only) */
+  /* Phase 9 (WCAG 2.2 AA on paper #f5f5f4): the reference's muted grey (#a8a29e, 2.3:1) is too faint as text.
+     muted-lg = large text (≥24px, 3:1), muted-sm = small text (4.5:1). Rules and decorative marks keep stone-400. */
+  --muted-lg: #928c87;
+  --muted-sm: #736c67;
   --stone-700: #44403c; /* body copy (contrast fix, plan §5.1) */
   --stone-950: #0c0a09; /* ink / dark panels */
   --black-archive: #070707; /* /projects background [A] (ref /design bg) */

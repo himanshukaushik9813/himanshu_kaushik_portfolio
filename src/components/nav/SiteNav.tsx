@@ -8,6 +8,7 @@ import { useIntroExited } from '@/motion/introState'
 import { prefersReducedMotion } from '@/motion/useReducedMotion'
 import { MenuOverlay } from './MenuOverlay'
 import './nav.css'
+import { hasPendingEntry } from '@/motion/entryScroll'
 
 const SCROLL_KEYS = new Set(['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' '])
 
@@ -22,7 +23,15 @@ export function SiteNav() {
   const [userScrolled, setUserScrolled] = useState(false)
   const location = useLocation()
   // Direct entries show the bar at once: a hash link, a restored scroll, or a return from another route.
-  const [forceVisible] = useState(() => typeof window !== 'undefined' && (!!window.location.hash || window.scrollY > 0 || !!(location.state as { restore?: string } | null)?.restore))
+  const [forceVisible, setForceVisible] = useState(false)
+  // Decided after hydration (the prerendered HTML can't know the hash, the restored scroll or router state),
+  // but before the first paint.
+  useLayoutEffect(() => {
+    // One-off read of browser-only state after hydration; it can't be derived during render without a mismatch.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (window.location.hash || hasPendingEntry() || window.scrollY > 0 || (location.state as { restore?: string } | null)?.restore) setForceVisible(true)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   const [menuOpen, setMenuOpen] = useState(false)
   const navRef = useRef<HTMLElement>(null)
   const buttonRef = useRef<HTMLButtonElement>(null)

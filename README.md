@@ -35,6 +35,13 @@ public/fonts/Amulya-Variable.woff2
 
 Without them the site falls back to system fonts, and the font checksum unit test will fail.
 
+## Deploy
+
+The site is published to Vercel from this Mac by double-clicking `deploy-to-vercel.command` (one folder up). It builds with the font files present, uploads the static output, and rebuilds once if Vercel's address differs from the one the pages were built for, so canonical links, link previews and the sitemap always point at the live site. Deploys don't go through GitHub because the font licence keeps the fonts out of the public repo.
+
+- `VITE_SITE_URL`: the live address, set by the deploy script.
+- `VITE_RESUME_PUBLIC`: turned on automatically when `public/resume/himanshu_resume.pdf` exists. Keep the PDF free of the phone number.
+
 ## Project structure
 ```
 src/

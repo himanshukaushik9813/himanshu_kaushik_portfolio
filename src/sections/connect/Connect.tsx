@@ -4,10 +4,10 @@ import { microcopy } from '@/content/microcopy'
 import { RESUME_PATH, RESUME_PUBLIC } from '@/config/site'
 import { BrandIcon, LinkedInGlyph } from '@/components/brand/BrandIcon'
 import { Arrow } from '@/components/ui/Arrow'
-import { useRef, type ReactNode } from 'react'
+import { useEffect, useRef, type ReactNode } from 'react'
 import { EmailDialog, type EmailDialogHandle } from '@/components/email/EmailDialog'
 import { useGsap } from '@/motion/useGsap'
-import { gsap, reduced, SplitText } from '@/motion/reveal'
+import { gsap, reduced } from '@/motion/reveal'
 import './connect.css'
 
 const icon = (id: string) =>
@@ -27,17 +27,34 @@ export function Connect() {
       .from(root.querySelectorAll('[data-reveal]'), { opacity: 0, y: 24, duration: 0.75, stagger: 0.12, ease: 'power3.out' })
       .from(root.querySelectorAll('[data-title-line]'), { yPercent: 110, rotate: 2, duration: 1.05, stagger: 0.08, ease: 'power4.out' }, 0.06)
       .from(root.querySelectorAll('[data-connect-link]'), { opacity: 0, y: 32, duration: 0.7, stagger: 0.08, ease: 'power3.out' }, 0.28)
+  }, ref)
+
+  // A18: the looping note. SplitText is loaded on demand (it's only used here, far below the fold).
+  useEffect(() => {
+    if (reduced()) return
+    const root = ref.current!
     const note = root.querySelector<HTMLElement>('[data-note]')
     const text = root.querySelector<HTMLElement>('[data-note-text]')
-    if (note && text) {
-      const split = SplitText.create(text, { type: 'words', wordsClass: 'connect__note-word', aria: 'auto' })
-      gsap
+    if (!note || !text) return
+    let cancelled = false
+    let split: { words: Element[]; revert(): void } | null = null
+    let tl: gsap.core.Timeline | null = null
+    void import('gsap/SplitText').then(({ SplitText }) => {
+      if (cancelled) return
+      gsap.registerPlugin(SplitText)
+      split = SplitText.create(text, { type: 'words', wordsClass: 'connect__note-word', aria: 'none' }) // words stay real text
+      tl = gsap
         .timeline({ repeat: -1, repeatDelay: 0.25, scrollTrigger: { trigger: note, start: 'top bottom', end: 'bottom top', toggleActions: 'play pause resume pause' } })
         .fromTo(split.words, { opacity: 0, yPercent: 65 }, { opacity: 1, yPercent: 0, duration: 0.55, stagger: 0.08, ease: 'power3.out' })
         .to(split.words, { opacity: 0, yPercent: -45, duration: 0.42, stagger: 0.055, ease: 'power2.in' }, '+=0.85')
-      return () => split.revert()
+    })
+    return () => {
+      cancelled = true
+      tl?.scrollTrigger?.kill()
+      tl?.kill()
+      split?.revert()
     }
-  }, ref)
+  }, [])
   return (
     <section ref={ref} id="connect" tabIndex={-1} className="connect" data-section="connect" aria-labelledby="connect-title">
       <div className="container">

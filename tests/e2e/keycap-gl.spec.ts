@@ -17,7 +17,7 @@ test.describe('6a keycap (A20)', () => {
     await page.setViewportSize({ width: 1440, height: 900 })
     const chunks: string[] = []
     page.on('request', (r) => { if (r.url().includes('keycapScene')) chunks.push(r.url()) })
-    await page.goto('/')
+    await page.goto('/?webgl')
     await toHeroEnd(page)
     const key = page.locator('[data-keycap="enter"]')
     await expect(key).toHaveAttribute('data-gl-ready', /.*/, { timeout: 10000 })
@@ -30,7 +30,7 @@ test.describe('6a keycap (A20)', () => {
 
   test('Enter shortcut: ignored during the intro and when another control has focus, works on the hero', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 })
-    await page.goto('/')
+    await page.goto('/?webgl')
     await page.waitForTimeout(1200)
     await page.keyboard.press('Enter') // key is in view but still hidden under the intro
     await page.waitForTimeout(600)

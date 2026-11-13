@@ -45,15 +45,17 @@ export function Hero() {
         <ul className="hero__socials" aria-label="Profile links">
           {socials.map((s) => (
             <li key={s.id} data-hero-action>
-              <a href={s.href} target={s.id === 'email' ? undefined : '_blank'} rel={s.id === 'email' ? undefined : 'noreferrer'} aria-label={s.label} data-label={s.label} className="icon-circle" data-hover="fill-y">
+              <a href={s.href} target={s.id === 'email' ? undefined : '_blank'} rel={s.id === 'email' ? undefined : 'noreferrer'} data-label={s.label} className="icon-circle" data-hover="fill-y">
                 {iconFor(s.id)}
+                <span className="sr-only">{s.label}</span>
               </a>
             </li>
           ))}
           {RESUME_PUBLIC ? (
             <li data-hero-action>
-              <a href={RESUME_PATH} target="_blank" rel="noreferrer" aria-label="View résumé" data-label="Résumé" className="icon-circle" data-hover="fill-y">
-                <FolderOpen size={15} strokeWidth={1.6} />
+              <a href={RESUME_PATH} target="_blank" rel="noreferrer" data-label="Résumé" className="icon-circle" data-hover="fill-y">
+                <FolderOpen size={15} strokeWidth={1.6} aria-hidden="true" />
+                <span className="sr-only">View résumé</span>
               </a>
             </li>
           ) : null}

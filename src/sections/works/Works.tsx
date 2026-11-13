@@ -24,6 +24,7 @@ const HOLD = 0.35 // timeline units each project rests (snap target sits in the 
  */
 export function Works() {
   const rootRef = useRef<HTMLElement>(null)
+  const spacerRef = useRef<HTMLDivElement>(null)
   const total = pad(featuredProjects.length)
   const transition = useRouteTransition()
 
@@ -70,6 +71,7 @@ export function Works() {
       start: 'top top',
       end: () => `+=${Math.round(Math.max(window.innerHeight * (n + 1), 3200))}`,
       pin: true,
+      pinSpacer: spacerRef.current, // own wrapper: no DOM move when pinning
       scrub: 0.8,
       anticipatePin: 1,
       invalidateOnRefresh: true,
@@ -101,6 +103,7 @@ export function Works() {
   }, rootRef)
 
   return (
+    <div ref={spacerRef}>
     <section id="works" ref={rootRef} tabIndex={-1} className="works" data-section="works" aria-labelledby="works-title">
       <div className="works-turnover" data-section="works-turnover" data-works-turnover aria-hidden="true">
         <MetaRow left={microcopy.works.turnoverMeta} right={`(01—${total})`} />
@@ -160,5 +163,6 @@ export function Works() {
         </footer>
       </div>
     </section>
+    </div>
   )
 }

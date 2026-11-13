@@ -17,7 +17,7 @@ export default function ProjectsPage() {
   const total = pad(publishedProjects.length)
   const transition = useRouteTransition()
   return (
-    <main className="archive" data-page="projects">
+    <main id="main" tabIndex={-1} className="archive" data-page="projects">
       <nav className="archive-nav" aria-label="Archive navigation">
         <Link
           to="/"

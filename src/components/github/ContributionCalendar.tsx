@@ -56,7 +56,7 @@ export function ContributionCalendar({ user, onUnavailable }: { user: string; on
           Less {[0, 1, 2, 3, 4].map((l) => <i key={l} data-level={l} />)} More
         </span>
       </div>
-      <div className="gh-cal__scroll" ref={scrollRef}>
+      <div className="gh-cal__scroll" ref={scrollRef} tabIndex={0} role="region" aria-label="GitHub contribution calendar (scrolls sideways on small screens)">
         <div className="gh-cal__body" style={{ ['--weeks' as string]: weeksCount }}>
           <div className="gh-cal__months" aria-hidden="true">
             {layout?.months.map((m) => (

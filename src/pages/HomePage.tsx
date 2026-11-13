@@ -16,7 +16,7 @@ export default function HomePage() {
   return (
     <SectionNavProvider>
       <SiteNav />
-      <main>
+      <main id="main" tabIndex={-1}>
         <IntroScene>
           <Hero />
         </IntroScene>

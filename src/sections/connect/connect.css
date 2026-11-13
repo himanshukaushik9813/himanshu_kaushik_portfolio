@@ -1,7 +1,7 @@
 .connect { background: var(--stone-100); padding: var(--section-y-l) var(--gutter) clamp(64px, 10vw, 104px); }
 .connect__top { display: grid; grid-template-columns: 35% minmax(0, 1fr); align-items: center; }
 .connect__intro { max-width: 21em; }
-.connect__eyebrow { font-family: var(--font-body); font-weight: 500; font-size: clamp(12px, 0.62vw, 16px); letter-spacing: 0.06em; text-transform: uppercase; color: var(--stone-400); }
+.connect__eyebrow { font-family: var(--font-body); font-weight: 500; font-size: clamp(12px, 0.62vw, 16px); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted-sm); }
 .connect__copy { margin-top: clamp(24px, 2.4vw, 56px); font-family: var(--font-body); font-size: clamp(17px, 0.98vw, 25px); line-height: 1.35; letter-spacing: -0.02em; color: var(--stone-700); }
 .connect__title { display: flex; flex-direction: column; font-family: var(--font-heading); font-weight: 900; font-size: clamp(56px, 12vw, 236px); letter-spacing: -0.075em; line-height: 0.74; text-transform: uppercase; color: var(--stone-950); }
 .connect__title-line { display: block; overflow: hidden; padding-block: 0.03em; }

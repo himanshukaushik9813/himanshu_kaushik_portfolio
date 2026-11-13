@@ -23,6 +23,7 @@ const FONT_TIMEOUT = 6000
  */
 export function IntroScene({ children }: { children: ReactNode }) {
   const rootRef = useRef<HTMLDivElement>(null)
+  const spacerRef = useRef<HTMLDivElement>(null)
 
   useGsap(() => {
     const root = rootRef.current!
@@ -45,7 +46,9 @@ export function IntroScene({ children }: { children: ReactNode }) {
     const actions = q('[data-hero-action]')
 
     // A1: greeting blur cross-fade loop (starts once fonts are ready, max 6 s wait).
-    gsap.set(greetingEls, { autoAlpha: 0, filter: `blur(${intro.greetingBlur}px)` })
+    // The first greeting is painted visible straight away (it's the page's largest text, so this is the LCP);
+    // the loop then starts at the moment that word is fully in.
+    gsap.set(greetingEls.slice(1), { autoAlpha: 0, filter: `blur(${intro.greetingBlur}px)` })
     const loop = gsap.timeline({ repeat: -1, paused: true })
     const step = intro.greetingCycle
     const fade = intro.greetingFade
@@ -63,7 +66,11 @@ export function IntroScene({ children }: { children: ReactNode }) {
     const playLoops = (on: boolean) => {
       if (on === loopsRunning) return
       loopsRunning = on
-      if (on) { loop.play(); wave.play() } else { loop.pause(); wave.pause() }
+      if (on) {
+        if (loop.totalTime() === 0) loop.play(fade)
+        else loop.play()
+        wave.play()
+      } else { loop.pause(); wave.pause() }
     }
     let started = false
     const start = () => {
@@ -100,6 +107,7 @@ export function IntroScene({ children }: { children: ReactNode }) {
       start: 'top top',
       end: () => `+=${Math.round(root.offsetHeight * intro.pinLength)}`,
       pin: true,
+      pinSpacer: spacerRef.current, // our own wrapper: pinning never moves the intro in the DOM (keeps the LCP stable)
       scrub: intro.scrub,
       anticipatePin: 1,
       invalidateOnRefresh: true,
@@ -130,9 +138,10 @@ export function IntroScene({ children }: { children: ReactNode }) {
   }, rootRef)
 
   return (
+    <div ref={spacerRef}>
     <div id="hero" ref={rootRef} className="intro-scene" data-section="intro" tabIndex={-1}>
       <section className="intro" aria-label="Portfolio introduction" data-intro-panel>
-        <h2 className="intro__title">
+        <p className="intro__title">
           <span className="sr-only">{microcopy.intro.heading} Welcome to {profile.name}'s portfolio.</span>
           <span className="intro__heading" aria-hidden="true">
             {microcopy.intro.heading}
@@ -150,13 +159,14 @@ export function IntroScene({ children }: { children: ReactNode }) {
               </span>
             ))}
           </span>
-        </h2>
+        </p>
         <p className="intro__cue" data-intro-cue>
           <span>{profile.introCue}</span>
           <Arrow dir="down" size={13} />
         </p>
       </section>
       {children}
+    </div>
     </div>
   )
 }

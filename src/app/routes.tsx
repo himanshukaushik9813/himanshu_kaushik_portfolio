@@ -1,9 +1,9 @@
-import { createBrowserRouter, redirect } from 'react-router'
+import { redirect, type RouteObject } from 'react-router'
 import App from './App'
 import HomePage from '@/pages/HomePage'
 
-/** Routes per plan §11 (D1): "/" and "/projects" only. No /lab. */
-export const router = createBrowserRouter([
+/** Routes per plan §11 (D1): "/" and "/projects" only. No /lab. Shared by the browser router and the prerenderer. */
+export const routes: RouteObject[] = [
   {
     path: '/',
     element: <App />,
@@ -13,4 +13,4 @@ export const router = createBrowserRouter([
       { path: '*', loader: () => redirect('/') },
     ],
   },
-])
+]

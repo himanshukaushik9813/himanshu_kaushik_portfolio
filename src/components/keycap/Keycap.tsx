@@ -124,7 +124,6 @@ export function Keycap({ legend, caption, to, theme = 'light', className, wipe =
       ref={rootRef}
       to={to}
       className={cn('keycap', `keycap--${theme}`, className)}
-      aria-label={caption}
       aria-keyshortcuts={SHORTCUT[legend]}
       data-gl-ready={glReady || undefined}
       data-keycap={legend}

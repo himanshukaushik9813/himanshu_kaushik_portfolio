@@ -22,8 +22,9 @@ export function BrandIcon({ slug, size = 14, colored = false }: { slug?: string;
 /** LinkedIn is not in simple-icons; the reference also renders it as a set "in" glyph. */
 export function LinkedInGlyph({ size = 14 }: { size?: number }) {
   return (
-    <span aria-hidden="true" style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: size * 0.95, lineHeight: 1, letterSpacing: '-0.02em' }}>
-      in
-    </span>
+    // drawn as SVG text so it's purely graphical: the link's accessible name stays exactly "LinkedIn"
+    <svg aria-hidden="true" focusable="false" width={size * 1.1} height={size} viewBox="0 0 22 20" style={{ display: 'block' }}>
+      <text x="11" y="15" textAnchor="middle" fill="currentColor" style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: 19, letterSpacing: '-0.02em' }}>in</text>
+    </svg>
   )
 }

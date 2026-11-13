@@ -99,3 +99,11 @@ h1, h2, h3, h4, p { margin: 0; }
   .code-activity__link, .archive-item__links a, .works-header__more { position: relative; }
   .code-activity__link::before, .archive-item__links a::before, .works-header__more::before { content: ''; position: absolute; inset: -10px -6px; }
 }
+
+/* Skip link: first Tab stop on every page, visible only when focused. */
+.skip-link {
+  position: fixed; top: 12px; left: 12px; z-index: 300; padding: 12px 18px; border-radius: 999px;
+  background: var(--stone-950); color: var(--stone-100); font-family: var(--font-body); font-weight: 700; font-size: 12px;
+  letter-spacing: 0.08em; text-transform: uppercase; transform: translateY(-160%); transition: transform 0.25s ease;
+}
+.skip-link:focus-visible { transform: none; outline: 2px solid var(--accent); outline-offset: 3px; }
