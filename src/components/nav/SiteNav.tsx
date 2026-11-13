@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useLocation } from 'react-router'
 import { Monogram } from '@/components/brand/Monogram'
 import { useSectionLinkHandler } from '@/components/transitions/sectionNavContext'
 import { profile } from '@/content/profile'
@@ -19,7 +20,9 @@ const SCROLL_KEYS = new Set(['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home
 export function SiteNav() {
   const introExited = useIntroExited()
   const [userScrolled, setUserScrolled] = useState(false)
-  const [forceVisible] = useState(() => typeof window !== 'undefined' && (!!window.location.hash || window.scrollY > 0))
+  const location = useLocation()
+  // Direct entries show the bar at once: a hash link, a restored scroll, or a return from another route.
+  const [forceVisible] = useState(() => typeof window !== 'undefined' && (!!window.location.hash || window.scrollY > 0 || !!(location.state as { restore?: string } | null)?.restore))
   const [menuOpen, setMenuOpen] = useState(false)
   const navRef = useRef<HTMLElement>(null)
   const buttonRef = useRef<HTMLButtonElement>(null)

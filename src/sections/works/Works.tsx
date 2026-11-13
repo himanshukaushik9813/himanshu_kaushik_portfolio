@@ -9,6 +9,7 @@ import { gsap, ScrollTrigger } from '@/motion/gsap'
 import { useGsap } from '@/motion/useGsap'
 import { prefersReducedMotion } from '@/motion/useReducedMotion'
 import { scrollToTarget } from '@/motion/scroll'
+import { useRouteTransition } from '@/components/transitions/routeTransitionContext'
 import './works.css'
 
 const pad = (n: number) => String(n).padStart(2, '0')
@@ -24,6 +25,7 @@ const HOLD = 0.35 // timeline units each project rests (snap target sits in the 
 export function Works() {
   const rootRef = useRef<HTMLElement>(null)
   const total = pad(featuredProjects.length)
+  const transition = useRouteTransition()
 
   useGsap(() => {
     if (prefersReducedMotion()) return
@@ -116,7 +118,16 @@ export function Works() {
         <MetaRow left={microcopy.works.headerLeft} center={microcopy.works.headerCenter} right={`(01—${total})`} className="works-gallery__meta" />
         <header className="works-header">
           <h2 id="works-title" className="works-header__title h-xl">{microcopy.works.title}</h2>
-          <Link to="/projects" className="works-header__more" data-hover="underline">
+          <Link
+            to="/projects"
+            className="works-header__more"
+            data-hover="underline"
+            onClick={(e) => {
+              if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
+              e.preventDefault()
+              transition.go('/projects', 'columns')
+            }}
+          >
             <span>{microcopy.works.viewMore}</span>
             <Arrow size={12} stroke={2} />
           </Link>

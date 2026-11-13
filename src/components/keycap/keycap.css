@@ -31,3 +31,16 @@
   filter: blur(6px); transform: rotateZ(7deg);
 }
 .keycap--dark .keycap-fallback__top { background: radial-gradient(120% 140% at 50% 0%, #fbfaf6 0%, #efede6 70%, #e3e1d9 100%); }
+
+/* Phase 6: WebGL layer over the DOM key; the DOM key hides once the first 3D frame is drawn. */
+.keycap { --press: 0; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.keycap__gl { position: absolute; inset: 0; display: block; pointer-events: none; }
+.keycap__canvas { display: block; width: 100%; height: 100%; opacity: 0; transition: opacity 0.45s ease; }
+.keycap[data-gl-ready] .keycap__canvas { opacity: 1; }
+.keycap .keycap-fallback { transition: opacity 0.45s ease; }
+.keycap[data-gl-ready] .keycap-fallback { opacity: 0; }
+/* DOM key press (fallback and reduced motion): the cap travels down a few px */
+.keycap-fallback__cap { translate: 0 calc(var(--press) * 5px); }
+.keycap-fallback__shadow { opacity: calc(1 - var(--press) * 0.25); }
+.keycap:focus-visible { outline: none; }
+.keycap:focus-visible .keycap__stage { outline: 2px solid var(--accent); outline-offset: 6px; border-radius: 18px; }

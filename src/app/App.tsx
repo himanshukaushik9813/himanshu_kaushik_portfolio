@@ -2,10 +2,11 @@ import { useEffect } from 'react'
 import { Outlet, ScrollRestoration } from 'react-router'
 import { startSmoothScroll, stopSmoothScroll } from '@/motion/lenis'
 import { refreshWhenReady } from '@/motion/refresh'
+import { RouteTransitionProvider } from '@/components/transitions/RouteTransition'
 
 /**
- * Layout shell. Phase 3 adds SiteNav + MenuOverlay; Phase 6 adds BandWipe/ColumnWipe
- * and the RouteTransitionProvider. Phase 1: Lenis + one refresh after fonts.
+ * Layout shell: Lenis + one refresh after fonts, and the route-transition layer (band/column wipes)
+ * that every page link to another route goes through.
  */
 export default function App() {
   useEffect(() => {
@@ -15,12 +16,12 @@ export default function App() {
   }, [])
 
   return (
-    <>
+    <RouteTransitionProvider>
       <a href="#main-content" className="sr-only focus:not-sr-only">Skip to content</a>
       <div id="main-content">
         <Outlet />
       </div>
       <ScrollRestoration />
-    </>
+    </RouteTransitionProvider>
   )
 }

@@ -1,4 +1,5 @@
 import { Link } from 'react-router'
+import { useRouteTransition } from '@/components/transitions/routeTransitionContext'
 import { publishedProjects } from '@/content/projects'
 import { microcopy } from '@/content/microcopy'
 import { profile } from '@/content/profile'
@@ -14,10 +15,20 @@ const pad = (n: number) => String(n).padStart(2, '0')
 export default function ProjectsPage() {
   const m = microcopy.projects
   const total = pad(publishedProjects.length)
+  const transition = useRouteTransition()
   return (
     <main className="archive" data-page="projects">
       <nav className="archive-nav" aria-label="Archive navigation">
-        <Link to="/" className="archive-nav__back" aria-label="Back to home">
+        <Link
+          to="/"
+          className="archive-nav__back"
+          aria-label="Back to home"
+          onClick={(e) => {
+            if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
+            e.preventDefault()
+            transition.go('/', 'columns', { restore: 'works' })
+          }}
+        >
           <Arrow dir="left" size={16} />
           <Monogram className="archive-nav__mark" />
         </Link>
@@ -28,7 +39,7 @@ export default function ProjectsPage() {
       <header className="archive-hero">
         <div className="archive-hero__side">
           <span className="meta">{m.metaLeft}</span>
-          <Keycap legend="backspace" caption={m.keycapCaption} to="/" theme="dark" className="archive-hero__keycap" />
+          <Keycap legend="backspace" caption={m.keycapCaption} to="/" theme="dark" restore="hero" className="archive-hero__keycap" />
           <span className="meta">(01—{total})</span>
         </div>
         <div className="archive-hero__main">
