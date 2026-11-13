@@ -1,0 +1,42 @@
+/* GitHub heatmap, stone greyscale (REFERENCE_ANALYSIS §6.10 [V]): ≈30 px cells at 2560, radius ≈4, gap ≈3. */
+.gh-cal {
+  --cell-gap: clamp(2px, 0.13vw, 4px);
+  --c0: #e7e5e4; --c1: #c9c6c3; --c2: #a8a29e; --c3: #57534e; --c4: var(--stone-950);
+}
+.gh-cal__title-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin: clamp(28px, 3vw, 72px) 0 clamp(18px, 1.6vw, 36px); }
+.gh-cal__title { font-family: var(--font-display); font-weight: 600; font-size: clamp(20px, 1.6vw, 40px); letter-spacing: -0.04em; line-height: 1.1; }
+.gh-cal__title-skeleton { color: var(--stone-400); }
+.gh-cal__legend { display: inline-flex; align-items: center; gap: 4px; font-family: var(--font-display); font-size: clamp(11px, 0.6vw, 15px); color: var(--stone-700); }
+.gh-cal__legend i { width: clamp(10px, 0.9vw, 24px); aspect-ratio: 1; border-radius: 3px; }
+
+.gh-cal__scroll { overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; padding-bottom: 4px; }
+.gh-cal__body {
+  display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: clamp(8px, 0.6vw, 14px); row-gap: 8px;
+  min-width: 640px; /* below this the block scrolls sideways (plan §10) */
+}
+.gh-cal__months {
+  grid-column: 2; display: grid; grid-template-columns: repeat(var(--weeks), 1fr); column-gap: var(--cell-gap);
+  font-family: var(--font-display); font-size: clamp(10px, 0.55vw, 14px); color: var(--stone-700);
+  min-height: 1.3em; /* reserved so the loaded labels don't shift the page */
+}
+.gh-cal__months span { white-space: nowrap; }
+.gh-cal__days {
+  grid-column: 1; grid-row: 2; display: grid; grid-template-rows: repeat(7, 1fr); row-gap: var(--cell-gap);
+  font-family: var(--font-display); font-size: clamp(10px, 0.55vw, 14px); color: var(--stone-700);
+}
+.gh-cal__days span { display: flex; align-items: center; }
+.gh-cal__grid {
+  grid-column: 2; grid-row: 2; display: grid; grid-auto-flow: column;
+  grid-template-rows: repeat(7, auto); grid-template-columns: repeat(var(--weeks), 1fr); gap: var(--cell-gap);
+}
+.gh-cal__grid span { aspect-ratio: 1; border-radius: clamp(2px, 0.16vw, 4px); background: var(--c0); }
+.gh-cal__grid span[data-empty] { background: transparent; }
+.gh-cal__grid span[data-skeleton] { background: #eeedeb; animation: gh-pulse 1.6s ease-in-out infinite; }
+.gh-cal [data-level='0'] { background: var(--c0); }
+.gh-cal [data-level='1'] { background: var(--c1); }
+.gh-cal [data-level='2'] { background: var(--c2); }
+.gh-cal [data-level='3'] { background: var(--c3); }
+.gh-cal [data-level='4'] { background: var(--c4); }
+.gh-cal__legend i[data-level] { display: inline-block; }
+@keyframes gh-pulse { 50% { opacity: 0.55; } }
+@media (prefers-reduced-motion: reduce) { .gh-cal__grid span[data-skeleton] { animation: none; } }

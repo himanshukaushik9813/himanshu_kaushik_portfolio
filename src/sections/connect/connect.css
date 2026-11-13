@@ -15,6 +15,7 @@
   gap: clamp(12px, 2vw, 36px); min-height: clamp(92px, 9vw, 160px);
   padding-inline: clamp(4px, 0.7vw, 12px); border-bottom: 1px solid var(--rule-soft); color: var(--stone-950);
 }
+button.connect-row { width: 100%; font: inherit; text-align: left; background: none; border-width: 0 0 1px; border-style: solid; border-color: var(--rule-soft); cursor: pointer; }
 .connect-row__index { font-family: var(--font-body); font-size: clamp(10px, 0.5vw, 13px); letter-spacing: 0.08em; color: var(--stone-400); }
 .connect-row__name { display: inline-flex; align-items: center; gap: clamp(14px, 1.1vw, 28px); min-width: 0; }
 .connect-row__label { font-family: var(--font-display); font-weight: 500; font-size: clamp(28px, 4.5vw, 84px); letter-spacing: -0.045em; line-height: 0.9; }

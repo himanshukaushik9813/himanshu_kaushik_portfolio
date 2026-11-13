@@ -4,7 +4,8 @@ import { microcopy } from '@/content/microcopy'
 import { RESUME_PATH, RESUME_PUBLIC } from '@/config/site'
 import { BrandIcon, LinkedInGlyph } from '@/components/brand/BrandIcon'
 import { Arrow } from '@/components/ui/Arrow'
-import { useRef } from 'react'
+import { useRef, type ReactNode } from 'react'
+import { EmailDialog, type EmailDialogHandle } from '@/components/email/EmailDialog'
 import { useGsap } from '@/motion/useGsap'
 import { gsap, reduced, SplitText } from '@/motion/reveal'
 import './connect.css'
@@ -12,9 +13,11 @@ import './connect.css'
 const icon = (id: string) =>
   id === 'github' ? <BrandIcon slug="github" size={22} /> : id === 'linkedin' ? <LinkedInGlyph size={20} /> : <Mail size={22} strokeWidth={1.4} />
 
-/** Let's connect (REFERENCE_ANALYSIS §6.11). Email opens a copy/open-mail dialog in Phase 7; plain mailto for now. */
+/** Let's connect (REFERENCE_ANALYSIS §6.11). The Email row is a button that opens the copy / open-Gmail dialog. */
 export function Connect() {
   const ref = useRef<HTMLElement>(null)
+  const emailDialog = useRef<EmailDialogHandle>(null)
+  const email = contactRows.find((s) => s.id === 'email')?.handle ?? ''
   // A17–A18 (REFERENCE_ANALYSIS §6.11): one `top 74%` reveal + the looping note (plays only while in view).
   useGsap(() => {
     if (reduced()) return
@@ -49,17 +52,26 @@ export function Connect() {
           </h2>
         </div>
         <nav className="connect__links" aria-label="Contact links">
-          {contactRows.map((s, i) => (
-            <a key={s.id} href={s.href} className="connect-row" data-hover="row" data-connect-link target={s.id === 'email' ? undefined : '_blank'} rel={s.id === 'email' ? undefined : 'noreferrer'}>
-              <span className="connect-row__index">{String(i + 1).padStart(2, '0')}</span>
-              <span className="connect-row__name">
-                <span className="icon-circle icon-circle--large">{icon(s.id)}</span>
-                <span className="connect-row__label">{s.label}</span>
-              </span>
-              <span className="connect-row__detail">{s.handle}</span>
-              <span className="icon-circle icon-circle--large connect-row__arrow"><Arrow size={18} stroke={1.3} /></span>
-            </a>
-          ))}
+          {contactRows.map((s, i) => {
+            const inner: ReactNode = (
+              <>
+                <span className="connect-row__index">{String(i + 1).padStart(2, '0')}</span>
+                <span className="connect-row__name">
+                  <span className="icon-circle icon-circle--large">{icon(s.id)}</span>
+                  <span className="connect-row__label">{s.label}</span>
+                </span>
+                <span className="connect-row__detail">{s.handle}</span>
+                <span className="icon-circle icon-circle--large connect-row__arrow"><Arrow size={18} stroke={1.3} /></span>
+              </>
+            )
+            return s.id === 'email' ? (
+              <button key={s.id} type="button" className="connect-row" data-hover="row" data-connect-link aria-haspopup="dialog" onClick={() => emailDialog.current?.open()}>
+                {inner}
+              </button>
+            ) : (
+              <a key={s.id} href={s.href} className="connect-row" data-hover="row" data-connect-link target="_blank" rel="noreferrer">{inner}</a>
+            )
+          })}
         </nav>
         <div className="connect__bottom">
           {RESUME_PUBLIC ? (
@@ -68,6 +80,7 @@ export function Connect() {
           <p className="connect__note" data-note><span aria-hidden="true">↳</span> <span data-note-text>{microcopy.connect.note}</span></p>
         </div>
       </div>
+      <EmailDialog ref={emailDialog} email={email} />
     </section>
   )
 }
