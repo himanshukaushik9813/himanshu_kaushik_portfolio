@@ -40,14 +40,14 @@ export const experience: ExperienceRow[] = [
     id: 'hackathons',
     kind: 'achievement',
     emphasis: 'primary',
-    title: '2x Hackathon Winner',
+    title: '7+ Hackathon Wins',
     detail: 'Recognised for innovative software solutions',
   },
   {
     id: 'leetcode',
     kind: 'achievement',
     emphasis: 'primary',
-    title: '200+ DSA problems',
+    title: '500+ DSA problems',
     detail: 'Solved on LeetCode',
   },
   {
