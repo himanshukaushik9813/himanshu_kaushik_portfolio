@@ -44,23 +44,39 @@
 .menu__list { display: flex; flex-direction: column; max-width: 60vw; }
 .menu-link { display: block; color: var(--stone-100); }
 .menu-link__inner { display: block; padding: 8px 1.2vw; }
-.menu-link__label { display: inline-block; font-family: var(--font-heading); font-weight: 650; font-size: clamp(40px, 5.6vw, 88px); /* max [A]: Phase 3 verification vs ref @2462 */ letter-spacing: -0.07em; line-height: 0.93; }
+.menu-link__label { display: inline-block; font-family: var(--font-heading); font-weight: 650; font-size: min(clamp(40px, 5.6vw, 88px), 9.2svh); /* max [A]: Phase 3 vs ref @2462; 9.2svh keeps all 7 links on short screens */ letter-spacing: -0.07em; line-height: 0.93; }
 .menu-aside { display: flex; flex-direction: column; gap: clamp(32px, 4vw, 72px); align-self: center; }
 .menu-aside__block { display: flex; flex-direction: column; gap: 12px; }
-.menu-aside small { font-family: var(--font-body); font-weight: 700; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--stone-400); }
-.menu-aside__email { font-family: var(--font-heading); font-weight: 500; font-size: clamp(16px, 1.25vw, 28px); /* email is longer than the ref; capped to stay inside the column */ letter-spacing: -0.04em; overflow-wrap: anywhere; }
+.menu-aside small { font-family: var(--font-body); font-weight: 700; font-size: var(--t-micro); letter-spacing: 0.16em; text-transform: uppercase; color: var(--stone-400); }
+.menu-aside__email { font-family: var(--font-heading); font-weight: 500; font-size: clamp(16px, 1.25vw, 28px); /* email is longer than the ref; capped to stay inside the column */ letter-spacing: -0.04em; overflow-wrap: break-word; }
 .menu-aside ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
 .menu-aside ul a { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-body); font-size: clamp(13px, 0.7vw, 16px); color: var(--stone-300); transition: color var(--dur-interaction) var(--ease-interaction); }
 .menu-aside ul a:hover, .menu-aside ul a:focus-visible { color: var(--stone-100); }
 .menu-aside__dot { width: 6px; height: 6px; border-radius: 50%; border: 1px solid currentColor; display: inline-block; }
 
+/* Tablet and phone (plan §7): the aside moves below the links. */
+@media (width <= 1023px) {
+  .menu__body { grid-template-columns: minmax(0, 1fr); align-items: start; align-content: start; }
+  .menu__list { max-width: none; }
+  .menu-aside { align-self: start; flex-direction: row; flex-wrap: wrap; gap: 28px 64px; }
+}
 @media (width <= 640px) {
   .site-nav__name { display: none; }
   .site-nav__mark { width: 26px; height: 35px; }
-  .menu__body { grid-template-columns: minmax(0, 1fr); align-items: start; }
-  .menu__list { max-width: none; }
-  .menu-link__label { font-size: clamp(36px, 11vw, 56px); }
+  .menu-link__label { font-size: min(clamp(36px, 11vw, 56px), 7.2svh); }
+  .menu-aside { flex-direction: column; gap: 28px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .site-nav__menu-button, .site-nav__glyph, .site-nav__glyph i, .site-nav__brand { transition: none; }
+}
+/* Phones held sideways: tighter menu so all seven links fit (the panel still scrolls if needed). */
+@media (height <= 500px) {
+  .menu__head { min-height: 60px; padding-block: 8px; }
+  .menu-link__inner { padding-block: 2px; }
+  .menu__body { padding-top: 4px; }
+  .menu-link__label { font-size: min(clamp(28px, 5.6vw, 88px), 9svh); }
+}
+@media (height <= 500px) and (width > 640px) {
+  .menu__body { grid-template-columns: minmax(0, 1fr) minmax(200px, 38%); align-items: center; }
+  .menu-aside { flex-direction: column; gap: 20px; }
 }

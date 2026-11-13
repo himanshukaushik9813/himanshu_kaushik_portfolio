@@ -16,21 +16,21 @@
 
 /* Featured gallery: one viewport (below the fixed nav), 1800 container */
 .works-gallery {
-  display: flex; flex-direction: column; height: 100svh; min-height: 640px;
+  display: flex; flex-direction: column; height: 100svh; min-height: 0;
   padding: calc(var(--nav-h) + clamp(16px, 2.4vh, 38px)) var(--gutter) 0;
   box-sizing: border-box; max-width: calc(var(--container) + 2 * var(--gutter));
 }
 .works-gallery__meta { color: var(--stone-950); }
 .works-header { position: relative; display: flex; align-items: flex-end; gap: clamp(16px, 2vw, 32px); padding: clamp(10px, 1.2vh, 20px) 0 clamp(12px, 1.4vh, 20px); border-bottom: 1px solid rgb(12 10 9 / 0.14); }
-.works-header__title { font-size: clamp(52px, 10vw, 190px); }
+.works-header__title { font-size: min(clamp(52px, 10vw, 190px), 17svh); } /* short laptops: the whole gallery still fits one screen */
 .works-header__more { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 0.5em; font-family: var(--font-body); font-weight: 700; font-size: 10px; letter-spacing: 0.07em; text-transform: uppercase; }
-.works-header__count { margin-left: auto; font-family: var(--font-heading); font-weight: 500; font-size: clamp(48px, 8vw, 150px); letter-spacing: -0.06em; line-height: 0.72; color: var(--stone-300); }
+.works-header__count { margin-left: auto; font-family: var(--font-heading); font-weight: 500; font-size: min(clamp(48px, 8vw, 150px), 14svh); letter-spacing: -0.06em; line-height: 0.72; color: var(--stone-300); }
 
 .works-body { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0, 2.49fr) minmax(0, 3.1fr); }
 .works-body__info { display: grid; border-right: 1px solid rgb(12 10 9 / 0.14); min-height: 0; overflow: hidden; }
 .works-body__info-item { grid-area: 1 / 1; min-height: 0; display: flex; flex-direction: column; }
 .works-body__info-item:not([data-active]) { pointer-events: none; }
-@media (prefers-reduced-motion: reduce) { .works-body__info-item:not([data-active]) { pointer-events: auto; } }
+@media (prefers-reduced-motion: reduce), (max-height: 500px) and (orientation: landscape) { .works-body__info-item:not([data-active]) { pointer-events: auto; } }
 .works-body__info-item > .project-info { flex: 1; }
 .works-body__frame { position: relative; overflow: hidden; min-height: 0; margin: 6px 0 6px 6px; }
 .works-body__strip { list-style: none; margin: 0; padding: 0; height: 100%; }
@@ -59,7 +59,7 @@
 }
 
 /* Reduced motion: no pin; the card sits above an unpinned list of every project. */
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce), (max-height: 500px) and (orientation: landscape) {
   .works-turnover { position: relative; inset: auto; }
   .works-gallery { height: auto; min-height: 0; }
   .works-header__count { visibility: hidden; }

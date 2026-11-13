@@ -1,5 +1,5 @@
 .skills { background: var(--stone-100); padding: 32px var(--gutter) var(--section-y-m); }
-.skills__meta { color: var(--stone-700); margin-bottom: clamp(28px, 3vw, 56px); font-size: 9.9px; letter-spacing: 0.1em; }
+.skills__meta { color: var(--stone-700); margin-bottom: clamp(28px, 3vw, 56px); font-size: var(--t-meta); letter-spacing: 0.1em; }
 .skills-row { position: relative; }
 .skills-row__heading { margin: 0; font: inherit; }
 .skills-row__trigger { display: flex; align-items: center; gap: clamp(10px, 1vw, 22px); width: 100%; padding-block: clamp(20px, 3.3vw, 50px); text-align: left; color: var(--stone-950); }

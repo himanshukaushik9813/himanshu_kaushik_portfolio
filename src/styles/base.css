@@ -84,3 +84,18 @@ h1, h2, h3, h4, p { margin: 0; }
 [tabindex='-1']:focus { outline: none; }
 /* Animated 1px divider used by row lists (Skills / Experience): drawn by revealRows() */
 .row-rule { position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--rule-soft); pointer-events: none; }
+
+/* Phase 8: touch screens get comfortable hit areas on small text links (≥ 32 px tall, WCAG 2.5.8 needs 24),
+   via padding + matching negative margin so the visual layout doesn't move. */
+@media (pointer: coarse) {
+  .project-links a,
+  .site-footer__nav a,
+  .site-footer__top,
+  .archive-nav__back {
+    padding-block: 9px;
+    margin-block: -9px;
+  }
+  /* underlined links keep their underline where it is: an invisible ::before extends the hit area instead */
+  .code-activity__link, .archive-item__links a, .works-header__more { position: relative; }
+  .code-activity__link::before, .archive-item__links a::before, .works-header__more::before { content: ''; position: absolute; inset: -10px -6px; }
+}

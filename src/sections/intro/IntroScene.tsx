@@ -2,7 +2,7 @@ import { useRef, type ReactNode } from 'react'
 import { gsap, ScrollTrigger } from '@/motion/gsap'
 import { useGsap } from '@/motion/useGsap'
 import { setIntroExited } from '@/motion/introState'
-import { prefersReducedMotion } from '@/motion/useReducedMotion'
+import { staticScenes } from '@/motion/useReducedMotion'
 import { scrollToTarget } from '@/motion/scroll'
 import { intro } from '@/motion/tokens'
 import { Hand } from 'lucide-react'
@@ -27,7 +27,7 @@ export function IntroScene({ children }: { children: ReactNode }) {
   useGsap(() => {
     const root = rootRef.current!
     const q = gsap.utils.selector(root)
-    if (prefersReducedMotion()) {
+    if (staticScenes()) {
       setIntroExited(true)
       return () => setIntroExited(false)
     }

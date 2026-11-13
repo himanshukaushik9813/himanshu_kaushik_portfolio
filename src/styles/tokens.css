@@ -42,8 +42,10 @@
   --t-subtitle: clamp(13px, 1.48vw, 26px);
   --t-body-l: clamp(17px, 0.9vw, 23px); /* [A]: ref ≈17px @1024, ≈23px @2560 */
   --t-body-s: 13px;
-  --t-meta: 11px;
-  --t-caption: 10px;
+  --t-meta: clamp(11px, 0.5vw, 13px);
+  /* smallest labels (indices, kickers, project links): never below 10px, grow on large screens */
+  --t-micro: clamp(10px, 0.48vw, 12.5px);
+  --t-caption: clamp(10px, 0.45vw, 12px);
 
   --track-hero: -0.075em;
   --track-xl: -0.068em;

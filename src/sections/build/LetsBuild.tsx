@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { gsap, ScrollTrigger } from '@/motion/gsap'
 import { useGsap } from '@/motion/useGsap'
-import { prefersReducedMotion } from '@/motion/useReducedMotion'
+import { staticScenes } from '@/motion/useReducedMotion'
 import { buildWords } from '@/content/build'
 import { buildWavePaths, centreOffset, type SlideBox } from './waveBuilder'
 import './build.css'
@@ -18,7 +18,7 @@ export function LetsBuild() {
   const last = buildWords.length - 1
 
   useGsap(() => {
-    if (prefersReducedMotion()) return
+    if (staticScenes()) return
     const root = rootRef.current!
     const q = gsap.utils.selector(root)
     const track = q('[data-build-track]')[0] as HTMLElement

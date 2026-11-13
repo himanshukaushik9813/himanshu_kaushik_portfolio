@@ -7,7 +7,7 @@ import { Arrow } from '@/components/ui/Arrow'
 import { ProjectArtTile, ProjectDetailShape, ProjectInfo, ProjectShot } from '@/components/project/ProjectParts'
 import { gsap, ScrollTrigger } from '@/motion/gsap'
 import { useGsap } from '@/motion/useGsap'
-import { prefersReducedMotion } from '@/motion/useReducedMotion'
+import { staticScenes } from '@/motion/useReducedMotion'
 import { scrollToTarget } from '@/motion/scroll'
 import { useRouteTransition } from '@/components/transitions/routeTransitionContext'
 import './works.css'
@@ -28,7 +28,7 @@ export function Works() {
   const transition = useRouteTransition()
 
   useGsap(() => {
-    if (prefersReducedMotion()) return
+    if (staticScenes()) return
     const root = rootRef.current!
     const q = gsap.utils.selector(root)
     const card = q('[data-works-turnover]')

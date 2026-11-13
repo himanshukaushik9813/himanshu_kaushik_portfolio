@@ -60,7 +60,9 @@ export function Connect() {
                   <span className="icon-circle icon-circle--large">{icon(s.id)}</span>
                   <span className="connect-row__label">{s.label}</span>
                 </span>
-                <span className="connect-row__detail">{s.handle}</span>
+                <span className="connect-row__detail">
+                  {s.handle.includes('@') && !s.handle.startsWith('@') ? <>{s.handle.split('@')[0]}@<wbr />{s.handle.split('@')[1]}</> : s.handle}
+                </span>
                 <span className="icon-circle icon-circle--large connect-row__arrow"><Arrow size={18} stroke={1.3} /></span>
               </>
             )

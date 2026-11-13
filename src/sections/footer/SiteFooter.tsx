@@ -30,11 +30,14 @@ export function SiteFooter() {
     <footer ref={ref} id="footer" className="site-footer" data-section="footer">
       <div className="container">
         <div className="site-footer__row">
-          <a href="#hero" aria-label={`${profile.name}, back to top`} onClick={toTop} data-footer-reveal><Monogram className="site-footer__logo" /></a>
+          <a href="#hero" className="site-footer__home" aria-label={`${profile.name}, back to top`} onClick={toTop} data-footer-reveal><Monogram className="site-footer__logo" /></a>
           <nav className="site-footer__nav" aria-label="Footer navigation" data-footer-reveal>
             {links.map((l) => <a key={l.href} href={l.href} onClick={onSectionLink} data-hover="lift">{l.label}</a>)}
           </nav>
-          <a href="#hero" className="site-footer__top" onClick={toTop} data-hover="lift" data-footer-reveal>{microcopy.footer.backToTop} <Arrow size={10} /></a>
+          {/* the reveal animates the wrapper: the link's own CSS opacity transition (hover "lift") would fight the tween */}
+          <span className="site-footer__top-wrap" data-footer-reveal>
+            <a href="#hero" className="site-footer__top" onClick={toTop} data-hover="lift">{microcopy.footer.backToTop} <Arrow size={10} /></a>
+          </span>
         </div>
         <p className="site-footer__name" aria-hidden="true" data-footer-reveal>
           <span className="site-footer__name-line">{profile.heroWords[0]}</span>

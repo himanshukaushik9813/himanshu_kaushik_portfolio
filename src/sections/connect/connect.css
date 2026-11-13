@@ -19,7 +19,7 @@ button.connect-row { width: 100%; font: inherit; text-align: left; background: n
 .connect-row__index { font-family: var(--font-body); font-size: clamp(10px, 0.5vw, 13px); letter-spacing: 0.08em; color: var(--stone-400); }
 .connect-row__name { display: inline-flex; align-items: center; gap: clamp(14px, 1.1vw, 28px); min-width: 0; }
 .connect-row__label { font-family: var(--font-display); font-weight: 500; font-size: clamp(28px, 4.5vw, 84px); letter-spacing: -0.045em; line-height: 0.9; }
-.connect-row__detail { font-family: var(--font-body); font-size: clamp(13px, 0.78vw, 20px); letter-spacing: -0.015em; overflow-wrap: anywhere; }
+.connect-row__detail { font-family: var(--font-body); font-size: clamp(13px, 0.78vw, 20px); letter-spacing: -0.015em; overflow-wrap: break-word; }
 .connect-row .icon-circle { border-color: currentColor; }
 .connect__bottom { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; margin-top: 28px; }
 .connect__note { display: flex; gap: 10px; max-width: 34ch; font-family: var(--font-body); font-size: clamp(13px, 0.7vw, 18px); color: var(--stone-700); }

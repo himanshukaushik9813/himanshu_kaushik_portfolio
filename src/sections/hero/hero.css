@@ -33,4 +33,4 @@
   mask-image: linear-gradient(90deg, transparent calc(var(--line-fade) * 140% - 40%), #000 calc(var(--line-fade) * 140%));
 }
 .hero-title { transform-origin: 50% 60%; }
-@media (prefers-reduced-motion: reduce) { .hero__mark { display: none; } }
+@media (prefers-reduced-motion: reduce), (max-height: 500px) and (orientation: landscape) { .hero__mark { display: none; } }

@@ -118,7 +118,7 @@ export function MenuOverlay({ open, onClose, returnFocusTo }: { open: boolean; o
         <aside className="menu-aside">
           <div className="menu-aside__block" data-menu-reveal>
             <small>Start a conversation</small>
-            <a href={`mailto:${profile.email}`} className="menu-aside__email">{profile.email}</a>
+            <a href={`mailto:${profile.email}`} className="menu-aside__email">{profile.email.split('@')[0]}@<wbr />{profile.email.split('@')[1]}</a>
           </div>
           <div className="menu-aside__block" data-menu-reveal>
             <small>Elsewhere</small>
