@@ -1,0 +1,23 @@
+@import 'tailwindcss';
+@import './styles/fonts.css';
+@import './styles/tokens.css';
+@import './styles/base.css';
+
+/* Map design tokens into Tailwind's theme so utilities use the same values. */
+@theme inline {
+  --color-paper: var(--stone-100);
+  --color-ink: var(--stone-950);
+  --color-stone-300: var(--stone-300);
+  --color-stone-400: var(--stone-400);
+  --color-stone-700: var(--stone-700);
+  --color-accent: var(--accent);
+  --font-heading: var(--font-heading);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-script: var(--font-script);
+  --breakpoint-xs: 430px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 1024px;
+  --breakpoint-lg: 1440px;
+  --breakpoint-xl: 2200px;
+}

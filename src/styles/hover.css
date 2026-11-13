@@ -1,0 +1,64 @@
+/*
+ * Global hover system (A24): CSS-only, same durations/eases as the reference's GSAP hovers
+ * (REFERENCE_ANALYSIS §8). Opt in with data-hover="…". Only on devices that really hover;
+ * reduced motion collapses all transitions (base.css).
+ *   power3.inOut ≈ cubic-bezier(.645,.045,.355,1) · expo.out ≈ cubic-bezier(.16,1,.3,1)
+ */
+:root {
+  --ease-p3-inout: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --ease-p3-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --ease-expo-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* fill-y: circular social icons. Ink fills bottom→top, icon turns paper, lift 3px, icon nudges ↗ (1.6s) */
+[data-hover='fill-y'] {
+  background-image: linear-gradient(var(--stone-950), var(--stone-950));
+  background-repeat: no-repeat; background-position: 50% 100%; background-size: 100% 0%;
+  transition: background-size 1.6s var(--ease-p3-inout), color 1.6s var(--ease-p3-inout), transform 1.6s var(--ease-p3-inout), border-color 1.6s var(--ease-p3-inout);
+}
+[data-hover='fill-y'] svg, [data-hover='fill-y'] > span { transition: transform 1.44s var(--ease-p3-inout); }
+
+/* fill-x: works info meta row. Faint ink wash left→right, text stone-400 → ink (1.6s) */
+[data-hover='fill-x'] {
+  background-image: linear-gradient(rgb(12 10 9 / 0.05), rgb(12 10 9 / 0.05));
+  background-repeat: no-repeat; background-size: 0% 100%;
+  transition: background-size 1.6s var(--ease-p3-inout), color 1.6s var(--ease-p3-inout);
+}
+[data-hover='fill-x'] svg { transition: transform 1.44s var(--ease-p3-inout); }
+
+/* row: connect / experience rows. Ink ::before scales bottom→top, text + circles invert (0.6s expo.out) */
+[data-hover='row'] { position: relative; isolation: isolate; transition: color 0.6s var(--ease-expo-out), padding 0.6s var(--ease-expo-out); }
+[data-hover='row']::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; background: var(--stone-950);
+  transform: scaleY(0); transform-origin: bottom; transition: transform 0.6s var(--ease-expo-out);
+}
+[data-hover='row'] .icon-circle { transition: border-color 0.6s var(--ease-expo-out); }
+
+/* underline: grows left→right under the label (works "View more") */
+[data-hover='underline'] { position: relative; }
+[data-hover='underline']::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -4px; height: 1.5px; background: currentColor;
+  transform: scaleX(0); transform-origin: left; transition: transform 0.9s var(--ease-expo-out);
+}
+[data-hover='underline'] svg { transition: transform 0.9s var(--ease-expo-out); }
+
+/* lift: generic links. opacity .72, up 2px (1.2s) */
+[data-hover='lift'] { display: inline-flex; transition: opacity 1.2s var(--ease-p3-inout), transform 1.2s var(--ease-p3-inout); }
+
+@media (hover: hover) {
+  [data-hover='fill-y']:hover, [data-hover='fill-y']:focus-visible { background-size: 100% 100%; color: var(--stone-100); border-color: var(--stone-950); transform: translateY(-3px); }
+  [data-hover='fill-y']:hover svg, [data-hover='fill-y']:hover > span, [data-hover='fill-y']:focus-visible svg { transform: translate(2px, -2px) scale(1.06); }
+  [data-hover='fill-x']:hover, [data-hover='fill-x']:focus-within { background-size: 100% 100%; color: var(--stone-950); }
+  [data-hover='fill-x']:hover svg { transform: translate(2px, -2px); }
+  [data-hover='row']:hover, [data-hover='row']:focus-visible { color: var(--stone-100); }
+  [data-hover='row']:hover::before, [data-hover='row']:focus-visible::before { transform: scaleY(1); }
+  [data-hover='row']:hover .icon-circle, [data-hover='row']:focus-visible .icon-circle { border-color: var(--stone-100); }
+  [data-hover='underline']:hover::after, [data-hover='underline']:focus-visible::after { transform: scaleX(1); }
+  [data-hover='underline']:hover svg { transform: translate(2px, -2px); }
+  [data-hover='lift']:hover, [data-hover='lift']:focus-visible { opacity: 0.72; transform: translateY(-2px); }
+}
+/* keyboard users on touch devices still get the fill on focus */
+@media (hover: none) {
+  [data-hover='row']:focus-visible { color: var(--stone-100); }
+  [data-hover='row']:focus-visible::before { transform: scaleY(1); }
+}

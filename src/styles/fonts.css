@@ -1,0 +1,29 @@
+/*
+ * Self-hosted Fontshare variable fonts, shipped UNMODIFIED.
+ * ITF Free Font License v2.0 permits self-hosting on our own site and forbids
+ * subsetting, format conversion and redistribution (see /fonts/LICENSE-ITF-FFL.txt).
+ * To swap a family, change only the src url and the --font-* token in tokens.css.
+ */
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Variable.woff2') format('woff2');
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Clash Display';
+  src: url('/fonts/ClashDisplay-Variable.woff2') format('woff2');
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Amulya';
+  src: url('/fonts/Amulya-Variable.woff2') format('woff2');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+/* Intro script face: OFL hairline script, chosen in Phase 2/5a (candidates to be shown).
+   Until then --font-script falls back to a system cursive. */

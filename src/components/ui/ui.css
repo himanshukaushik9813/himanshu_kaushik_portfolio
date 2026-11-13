@@ -1,0 +1,16 @@
+.meta-row { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; }
+.meta-row__center { flex: 1; text-align: center; }
+.meta-row > :first-child { flex: 1; }
+.meta-row__right { flex: 1; text-align: right; }
+.meta-row:not(:has(.meta-row__center)) > :first-child { flex: initial; }
+
+.icon-circle {
+  display: inline-grid; place-items: center; flex: none;
+  width: var(--icon-circle-s); height: var(--icon-circle-s);
+  border: 1px solid currentColor; border-radius: 50%;
+}
+.icon-circle--large { width: var(--icon-circle-l); height: var(--icon-circle-l); }
+
+.badge { display: inline-flex; align-items: center; gap: 6px; }
+.badge__dot { width: 6px; height: 6px; border-radius: 50%; border: 1px solid var(--accent); }
+.badge__dot--filled { background: var(--accent); }

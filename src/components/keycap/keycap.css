@@ -1,0 +1,33 @@
+.keycap { display: inline-flex; flex-direction: column; align-items: center; gap: clamp(10px, 1.6vh, 22px); }
+.keycap__stage { position: relative; display: grid; place-items: center; width: calc(var(--keycap-w) * 1.33); height: calc(var(--keycap-h) * 1.34); }
+.keycap__caption { color: var(--stone-700); letter-spacing: 0.1em; font-size: clamp(10px, 0.5vw, 12px); }
+.keycap--dark .keycap__caption { color: var(--stone-300); }
+
+.keycap-fallback { position: relative; width: var(--keycap-w); height: var(--keycap-h); display: block; perspective: 700px; }
+.keycap-fallback__cap {
+  position: absolute; inset: 0;
+  transform: rotateX(30deg) rotateY(-6deg) rotateZ(7deg);
+  transform-style: preserve-3d;
+}
+.keycap-fallback__skirt {
+  position: absolute; inset: 14% 0 -14% 0;
+  border-radius: 9% / 14%;
+  background: linear-gradient(180deg, #ecebe4 0%, #dedcd3 60%, #cfccc2 100%);
+  box-shadow: inset 0 -6px 10px rgb(0 0 0 / 0.06);
+}
+.keycap-fallback__top {
+  position: absolute; inset: 0 5% 16% 5%;
+  border-radius: 9% / 16%;
+  background: radial-gradient(120% 140% at 50% 0%, #fbfaf6 0%, #f4f2ec 70%, #ecebe4 100%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.9), inset 0 -2px 4px rgb(0 0 0 / 0.05);
+  display: flex; align-items: center; justify-content: center; gap: 6%;
+  color: var(--stone-950);
+}
+.keycap-fallback__icon { width: 15%; height: auto; color: var(--accent); }
+.keycap-fallback__label { font-family: var(--font-heading); font-weight: 700; font-size: calc(var(--keycap-h) * 0.16); letter-spacing: 0.08em; text-transform: uppercase; }
+.keycap-fallback__shadow {
+  position: absolute; left: 6%; right: 2%; bottom: -18%; height: 26%;
+  background: radial-gradient(closest-side, rgb(12 10 9 / 0.22), transparent);
+  filter: blur(6px); transform: rotateZ(7deg);
+}
+.keycap--dark .keycap-fallback__top { background: radial-gradient(120% 140% at 50% 0%, #fbfaf6 0%, #efede6 70%, #e3e1d9 100%); }

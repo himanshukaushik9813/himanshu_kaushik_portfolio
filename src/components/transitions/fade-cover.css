@@ -1,0 +1,1 @@
+.fade-cover { position: fixed; inset: 0; z-index: 90; display: none; visibility: hidden; opacity: 0; background: var(--stone-100); pointer-events: none; }

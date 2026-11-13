@@ -1,0 +1,107 @@
+/*
+ * Design tokens: transcribed from IMPLEMENTATION_PLAN.md §5 (do not invent values here).
+ * [A] = approximate value from reference frames; tune visually in later phases.
+ */
+:root {
+  /* 5.1 Colour */
+  --stone-100: #f5f5f4; /* paper / page bg */
+  --stone-300: #d6d3d1; /* text on dark, secondary */
+  --stone-400: #a8a29e; /* muted (large/decorative text only) */
+  --stone-700: #44403c; /* body copy (contrast fix, plan §5.1) */
+  --stone-950: #0c0a09; /* ink / dark panels */
+  --black-archive: #070707; /* /projects background [A] (ref /design bg) */
+  --accent: #ff5a3d;
+
+  --p1-accent: #ff5a3d; --p1-ink: #161412; --p1-soft: #e7e1dc;
+  --p2-accent: #c5f65a; --p2-ink: #111510; --p2-soft: #dce1d9;
+  --p3-accent: #90a9ff; --p3-ink: #121426; --p3-soft: #dedfeb;
+
+  --rule-strong: var(--stone-950);
+  --rule-soft: var(--stone-400);
+  --rule-faint: #0c0a0924;
+
+  /* 5.2 Type families */
+  --font-heading: 'Satoshi', Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Clash Display', 'Arial Narrow', Arial, sans-serif;
+  --font-body: 'Amulya', Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-script: 'Sacramento', 'Segoe Script', cursive; /* OFL (Fontsource). D5 default; candidates in reports/phase-2 */
+
+  /* 5.2 Type scale (fluid) */
+  --t-greeting: clamp(86px, 19vw, 290px); /* sized by visual match of glyph height to ref @2560 (Phase 2) [A] */
+  --t-greeting-cjk: clamp(64px, 13.9vw, 210px);
+  --t-hero: clamp(40px, 9vw, 164px); /* max [A]: tuned in Phase 1 verification (ref cap ≈127px @2560) */
+  --t-xxl-works: clamp(52px, 13vw, 240px);
+  --t-xxl-build: clamp(44px, 11vw, 250px); /* max [A]: Phase 2 verification (ref cap ≈163px @2560) */
+  --t-xxl-connect: clamp(56px, 12vw, 230px);
+  --t-xl: clamp(52px, 10vw, 180px);
+  --t-l: clamp(48px, 5.15vw, 100px); /* max [A]: tuned in Phase 1 verification */
+  --t-m: clamp(36px, 5.6vw, 120px);
+  --t-counter: clamp(48px, 8vw, 160px);
+  --t-connect-name: clamp(28px, 4.5vw, 72px);
+  --t-project-title: clamp(20px, 2.54vw, 40px);
+  --t-subtitle: clamp(13px, 1.48vw, 26px);
+  --t-body-l: clamp(17px, 0.9vw, 23px); /* [A]: ref ≈17px @1024, ≈23px @2560 */
+  --t-body-s: 13px;
+  --t-meta: 11px;
+  --t-caption: 10px;
+
+  --track-hero: -0.075em;
+  --track-xl: -0.068em;
+  --track-l: -0.062em;
+  --track-m: -0.052em;
+  --track-meta: 0.06em;
+  --track-caption: 0.1em;
+
+  /* 5.3 Spacing */
+  --gutter: clamp(16px, 3.4vw, 64px);
+  --nav-pad-x: clamp(20px, 2.7vw, 52px);
+  --section-y-s: clamp(32px, 4vw, 72px);
+  --section-y-m: clamp(64px, 8vw, 144px);
+  --section-y-l: clamp(88px, 11vw, 200px);
+  --grid-gap: clamp(48px, 6vw, 120px);
+  --container: 1800px;
+  --measure-s: 28ch;
+  --measure-m: 36ch;
+  --measure-l: 46ch;
+
+  /* 5.4 Sizing */
+  --nav-h: 68px;
+  --menu-btn-w: 104px;
+  --menu-btn-h: 42px;
+  --icon-circle-s: 36px;
+  --icon-circle-l: clamp(48px, 4.5vw, 72px);
+  --keycap-w: 240px;
+  --keycap-h: 142px;
+  --logo-sweep: clamp(104px, 15vw, 200px);
+  --hairline: 1px;
+  --logo-line: 2px; /* [A] */
+  --wave-stroke: clamp(12px, 1.65vw, 30px);
+  --radius-card: 4px;
+  --radius-photo: 6px; /* [A] */
+  --radius-tooltip: 6px;
+
+  /* 5.6 Motion */
+  --ease-interaction: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-interaction: 0.9s;
+  --ease-fill: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fill: 1.15s;
+  --dur-icon: 1.35s;
+  --dur-icon-fill: 1.6s;
+  --dur-connect: 0.6s;
+  --ease-nav: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-nav: 0.5s;
+}
+
+@media (width <= 640px) {
+  :root {
+    --nav-h: 60px; /* [A] */
+    --keycap-w: 176px;
+    --keycap-h: 84px;
+  }
+}
+@media (height <= 620px) {
+  :root {
+    --keycap-w: 220px;
+    --keycap-h: 130px;
+  }
+}

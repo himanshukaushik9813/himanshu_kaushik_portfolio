@@ -1,0 +1,16 @@
+node_modules
+dist
+test-results
+playwright-report
+verification/
+*.local
+.env*
+!.env.example
+# Fonts: ITF Free Font License forbids distribution via public repositories.
+public/fonts/*.woff2
+public/fonts/*.woff
+public/fonts/LICENSE-ITF-FFL.txt
+# Résumé is kept out of public/ until VITE_RESUME_PUBLIC is approved (contains phone number).
+public/resume/
+
+.DS_Store

@@ -1,0 +1,42 @@
+.archive {
+  min-height: 100svh; color: var(--stone-100);
+  background: radial-gradient(circle at 72% 9%, rgb(255 255 255 / 0.04), transparent 28%), var(--black-archive);
+  --detail-bg: var(--black-archive);
+}
+.archive-nav { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; min-height: 70px; padding: 10px var(--gutter); border-bottom: 1px solid rgb(255 255 255 / 0.1); }
+.archive-nav__back { display: inline-flex; align-items: center; gap: 14px; }
+.archive-nav__mark { width: 24px; height: 32px; }
+.archive-nav__center, .archive-nav__right { font-family: var(--font-display); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+.archive-nav__right { justify-self: end; color: var(--stone-400); }
+.archive-hero { display: grid; grid-template-columns: minmax(0, 0.33fr) minmax(0, 0.67fr); gap: var(--grid-gap); padding: clamp(64px, 8vw, 160px) var(--gutter) clamp(64px, 8vw, 140px); max-width: calc(var(--container) + 2 * var(--gutter)); margin-inline: auto; }
+.archive-hero__side { display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; gap: 40px; color: var(--stone-400); }
+.archive-hero__keycap { margin-left: -24px; }
+.archive-hero__title { font-family: var(--font-heading); font-weight: 500; font-size: clamp(36px, 5.9vw, 120px); letter-spacing: -0.06em; line-height: 0.98; color: var(--stone-100); }
+.archive-hero__muted { color: var(--stone-400); }
+.archive-hero__note { margin-top: clamp(48px, 7vw, 140px); font-family: var(--font-body); font-size: clamp(14px, 0.8vw, 18px); color: var(--stone-300); }
+
+.archive-list { list-style: none; margin: 0 auto; padding: 0 var(--gutter); max-width: calc(var(--container) + 2 * var(--gutter)); }
+.archive-item { padding: 6px 0 clamp(64px, 7vw, 140px); border-top: 1px solid rgb(255 255 255 / 0.12); }
+.archive-item__card { display: grid; grid-template-columns: minmax(0, 2.49fr) repeat(2, minmax(0, 1fr)) minmax(0, 1.04fr); gap: 6px; height: clamp(520px, 52vw, 980px); }
+.archive-item__info { border-right: 1px solid rgb(255 255 255 / 0.12); }
+.archive-item .project-detail__footer { color: var(--stone-400); }
+.archive-item .project-detail__index { color: var(--stone-300); }
+.archive-item__write-up { display: grid; grid-template-columns: minmax(0, 0.33fr) minmax(0, 0.67fr); gap: var(--grid-gap); margin-top: clamp(36px, 3.4vw, 64px); }
+.archive-item__write-up > .meta { color: var(--stone-400); }
+.archive-item__bullets { margin: 0; padding-left: 1.1em; display: grid; gap: 10px; font-family: var(--font-body); font-size: clamp(15px, 0.92vw, 21px); line-height: 1.55; color: var(--stone-300); max-width: 62ch; }
+.archive-item__links { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 28px; font-family: var(--font-display); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+.archive-item__links a { display: inline-flex; align-items: center; gap: 6px; border-bottom: 1px solid currentColor; padding-bottom: 3px; }
+.archive-footer { display: grid; gap: 28px; padding: clamp(80px, 9vw, 180px) var(--gutter) 48px; max-width: calc(var(--container) + 2 * var(--gutter)); margin-inline: auto; border-top: 1px solid rgb(255 255 255 / 0.12); color: var(--stone-300); }
+.archive-footer__cta { display: flex; justify-content: space-between; align-items: center; padding-bottom: 20px; border-bottom: 1px solid rgb(255 255 255 / 0.2); font-family: var(--font-heading); font-weight: 300; font-size: clamp(36px, 4.2vw, 88px); letter-spacing: -0.05em; color: var(--stone-100); }
+.archive-footer__end { color: var(--stone-400); }
+@media (width <= 1023px) {
+  .archive-hero, .archive-item__write-up { grid-template-columns: minmax(0, 1fr); }
+  .archive-hero__side { flex-direction: row; flex-wrap: wrap; align-items: center; }
+  .archive-item__card { grid-template-columns: repeat(3, minmax(0, 1fr)); height: auto; }
+  .archive-item__info { grid-column: 1 / -1; border-right: 0; border-bottom: 1px solid rgb(255 255 255 / 0.12); padding-bottom: 8px; }
+  .archive-item__card > :not(.archive-item__info) { aspect-ratio: 4 / 5; }
+  .archive-item .project-detail__footer { display: none; }
+}
+@media (width <= 640px) {
+  .archive-nav__center { display: none; }
+}
