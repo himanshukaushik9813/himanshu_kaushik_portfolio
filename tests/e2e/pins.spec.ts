@@ -89,14 +89,14 @@ test.describe('5c Works turnover + Featured gallery (A12, A13, A24)', () => {
   test('card lifts away, strip steps one frame per project, counter + copy follow, snap rests on a project', async ({ page }) => {
     const [start, end] = await pinRange(page, WORKS)
     const n = await page.locator('[data-works-info]').count()
-    expect(n).toBe(3)
+    expect(n).toBeGreaterThanOrEqual(3)
     await glideTo(page, start)
     expect(await page.locator('[data-works-turnover]').evaluate((el) => el.getBoundingClientRect().top)).toBeLessThan(2)
     // scroll somewhere inside project 2's switch and let snap settle
     const total = 1 + (n - 1) * 1.35 + 0.35
     await glideTo(page, start + (end - start) * ((1 + 1.35 + 0.5) / total), 2200)
     const y = await page.evaluate(() => window.scrollY)
-    const stops = [0, 1.175, 2.525, total].map((t) => start + ((end - start) * t) / total)
+    const stops = [0, ...Array.from({ length: n }, (_, i) => 1.175 + i * 1.35).filter((t) => t < total), total].map((t) => start + ((end - start) * t) / total)
     expect(Math.min(...stops.map((s) => Math.abs(s - y)))).toBeLessThan(6)
     const counter = await page.locator('[data-works-count]').textContent()
     const activeIdx = await page.locator('[data-works-info]').evaluateAll((els) => els.findIndex((e) => e.hasAttribute('data-active')))

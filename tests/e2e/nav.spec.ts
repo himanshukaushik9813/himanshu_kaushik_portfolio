@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs'
 import { expect, test, type Page } from '@playwright/test'
 
 const nav = (page: Page) => page.locator('nav.site-nav')
@@ -94,6 +95,12 @@ test('footer links navigate to their section', async ({ page }) => {
 })
 
 test('reduced motion: menu opens instantly and links jump without the fade', async ({ page }) => {
+  // The GitHub activity block hides itself when its data can't load, which would shorten the page
+  // mid-test (this sandbox has no network): serve the recorded snapshot instead.
+  const fixture = readFileSync('tests/fixtures/github-himanshukaushik9813-2026-11-13.json', 'utf8')
+  await page.route('**/github-contributions-api.jogruber.de/**', (r) =>
+    r.fulfill({ status: 200, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: fixture }),
+  )
   await page.emulateMedia({ reducedMotion: 'reduce' })
   await page.goto('/#what-i-do')
   await page.getByRole('button', { name: 'Open navigation menu' }).click()

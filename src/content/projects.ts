@@ -99,6 +99,7 @@ export const projects: Project[] = [
       { kind: 'live', label: 'Live', href: 'https://frontend-blush-five-75.vercel.app' },
     ],
     offline: false,
+    screenshot: '/media/work/zeropath-shot.jpg',
     accentSlot: 2,
     detailShape: 'ring',
   },
@@ -138,6 +139,37 @@ export const projects: Project[] = [
     screenshot: '/media/work/aviation-shot.jpg',
     accentSlot: 3,
     detailShape: 'crescent',
+  },
+  {
+    id: 'vistavise',
+    published: true,
+    featured: true,
+    title: 'VistaVise',
+    category: 'Client Website — Business Consulting',
+    badge: 'Client project · 2026',
+    summary:
+      'A modern business consulting website focused on helping businesses and aspiring Business Analysts gain clarity, develop practical skills and make better business decisions.',
+    work: [
+      'Built the whole site for a client.',
+      'Designed and developed the website, including frontend architecture, UI/UX, responsive layouts and animations.',
+      'Added a minimal Express.js backend for health checks.',
+    ],
+    stack: [
+      { name: 'Next.js 16', icon: 'nextdotjs' },
+      { name: 'React 19', icon: 'react' },
+      { name: 'TypeScript', icon: 'typescript' },
+      { name: 'Tailwind CSS', icon: 'tailwindcss' },
+      { name: 'Framer Motion', icon: 'framer' },
+      { name: 'Express.js', icon: 'express' },
+    ],
+    links: [
+      { kind: 'code', label: 'Code', href: 'https://github.com/himanshukaushik9813/vistavise' },
+      { kind: 'live', label: 'Live', href: 'https://vistavise.com.au' },
+    ],
+    offline: false,
+    accentSlot: 4,
+    detailShape: 'grid',
+    screenshot: '/media/work/vistavise-shot.jpg',
   },
 ]
 

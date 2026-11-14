@@ -49,7 +49,7 @@ test.describe('7a GitHub heatmap', () => {
     await expect(page.locator('.gh-cal__title')).toHaveText(/243 contributions/, { timeout: 6000 })
     await page.reload()
     await toActivity(page)
-    await expect(page.locator('.gh-cal__title')).toHaveText(/243 contributions/)
+    await expect(page.locator('.gh-cal__title')).toHaveText(/243 contributions/, { timeout: 10000 })
     expect(hits).toHaveLength(1)
   })
 

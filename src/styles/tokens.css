@@ -19,6 +19,7 @@
   --p1-accent: #ff5a3d; --p1-ink: #161412; --p1-soft: #e7e1dc;
   --p2-accent: #c5f65a; --p2-ink: #111510; --p2-soft: #dce1d9;
   --p3-accent: #90a9ff; --p3-ink: #121426; --p3-soft: #dedfeb;
+  --p4-accent: #e9c48f; --p4-ink: #1a1612; --p4-soft: #ece3d6;
 
   --rule-strong: var(--stone-950);
   --rule-soft: var(--stone-400);

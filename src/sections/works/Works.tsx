@@ -76,7 +76,9 @@ export function Works() {
       anticipatePin: 1,
       invalidateOnRefresh: true,
       animation: tl,
-      snap: { snapTo: stops, duration: { min: 0.18, max: 0.45 }, ease: 'power2.inOut', delay: 0.08 },
+      // inertia off: snap to the nearest project. With inertia, a keyboard jump (one big scroll step) read as
+      // a fast fling and overshot to the next project.
+      snap: { snapTo: stops, duration: { min: 0.18, max: 0.45 }, ease: 'power2.inOut', delay: 0.08, inertia: false },
       onUpdate: (self) => {
         const t = self.progress * total
         show(Math.max(0, Math.min(n - 1, t < 1 + HOLD + 0.5 ? 0 : Math.floor((t - 1 - HOLD - 0.5) / (1 + HOLD)) + 1)))

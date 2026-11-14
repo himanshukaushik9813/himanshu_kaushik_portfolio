@@ -1,10 +1,11 @@
-import { siGithub, siGmail, siNextdotjs, siTypescript, siSolidity, siSupabase, siTelegram, siRust, siStellar, siFastapi, siPython, siThreedotjs, siPandas, siScikitlearn, siX, siLeetcode } from 'simple-icons'
+import { siGithub, siGmail, siNextdotjs, siTypescript, siSolidity, siSupabase, siTelegram, siRust, siStellar, siFastapi, siPython, siThreedotjs, siPandas, siScikitlearn, siX, siLeetcode, siReact, siTailwindcss, siFramer, siExpress } from 'simple-icons'
 
 /** Tree-shaken brand marks (simple-icons, CC0). Missing marks render a neutral dot, never a fake logo. */
 const icons: Record<string, { path: string; hex: string }> = {
   github: siGithub, gmail: siGmail, nextdotjs: siNextdotjs, typescript: siTypescript, solidity: siSolidity,
   supabase: siSupabase, telegram: siTelegram, rust: siRust, stellar: siStellar, fastapi: siFastapi,
   python: siPython, threedotjs: siThreedotjs, pandas: siPandas, scikitlearn: siScikitlearn, x: siX, leetcode: siLeetcode,
+  react: siReact, tailwindcss: siTailwindcss, framer: siFramer, express: siExpress,
 }
 
 export function BrandIcon({ slug, size = 14, colored = false }: { slug?: string; size?: number; colored?: boolean }) {
