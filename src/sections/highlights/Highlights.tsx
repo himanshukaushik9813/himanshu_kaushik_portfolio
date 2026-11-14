@@ -2,7 +2,7 @@ import { highlights } from '@/content/highlights'
 import { publishedProjects } from '@/content/projects'
 import { microcopy } from '@/content/microcopy'
 import { cn } from '@/lib/cn'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useGsap } from '@/motion/useGsap'
 import { gsap, parallax, reduced } from '@/motion/reveal'
 import './highlights.css'
@@ -13,7 +13,8 @@ import './highlights.css'
  */
 export function Highlights() {
   const visible = highlights.filter((h) => publishedProjects.some((p) => p.id === h.projectId))
-  const featured = visible.find((h) => h.featured) ?? visible[0]
+  // The big panel goes to a real recording when one exists; placeholders take the small slots.
+  const featured = visible.find((h) => h.featured && h.src) ?? visible.find((h) => h.src) ?? visible.find((h) => h.featured) ?? visible[0]
   const side = visible.filter((h) => h !== featured)
   const projectOf = (id: string) => publishedProjects.find((p) => p.id === id)!
   const ref = useRef<HTMLElement>(null)
@@ -49,7 +50,7 @@ export function Highlights() {
         <div className="highlights__board" data-board>
           {featured ? (
             <figure className="motion-study motion-study--featured" data-panel>
-              <StudyMedia src={featured.src} poster={featured.poster} label={featured.label} />
+              <StudyMedia src={featured.src} srcWebm={featured.srcWebm} poster={featured.poster} label={featured.label} />
               <figcaption className="motion-study__caption">
                 <span className="motion-study__title">{projectOf(featured.projectId).title}</span>
                 <span className="motion-study__note">{projectOf(featured.projectId).category}</span>
@@ -58,8 +59,8 @@ export function Highlights() {
           ) : null}
           <div className="highlights__side">
             {side.map((h) => (
-              <figure key={h.id} className="motion-study" data-panel>
-                <StudyMedia src={h.src} poster={h.poster} label={h.label} />
+              <figure key={h.id} className={cn('motion-study', h.src && 'motion-study--has-video')} data-panel>
+                <StudyMedia src={h.src} srcWebm={h.srcWebm} poster={h.poster} label={h.label} />
                 <figcaption className="motion-study__tag meta">{projectOf(h.projectId).title}</figcaption>
               </figure>
             ))}
@@ -74,9 +75,29 @@ export function Highlights() {
   )
 }
 
-function StudyMedia({ src, poster, label }: { src?: string; poster?: string; label: string }) {
+function StudyMedia({ src, srcWebm, poster, label }: { src?: string; srcWebm?: string; poster?: string; label: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  // Plays only while on screen (and never with reduced motion: the poster stays), so off-screen
+  // clips cost nothing.
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video || reduced()) return
+    const io = new IntersectionObserver(([entry]) => {
+      if (entry?.isIntersecting) void video.play().catch(() => undefined)
+      else video.pause()
+    }, { threshold: 0.25 })
+    io.observe(video)
+    return () => io.disconnect()
+  }, [src])
   if (src) {
-    return <div className="motion-study__media" data-media><video className="motion-study__video" src={src} poster={poster} muted playsInline loop preload="metadata" aria-label={label} /></div>
+    return (
+      <div className="motion-study__media" data-media>
+        <video ref={videoRef} className="motion-study__video" poster={poster} muted playsInline loop preload="none" aria-label={label}>
+          {srcWebm ? <source src={srcWebm} type="video/webm" /> : null}
+          <source src={src} type="video/mp4" />
+        </video>
+      </div>
+    )
   }
   return (
     <div className={cn('motion-study__pending')} data-media>

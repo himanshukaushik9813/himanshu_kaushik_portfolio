@@ -96,6 +96,8 @@ export interface Highlight {
   label: string
   /** undefined = "RECORDING COMING SOON" placeholder (no fake media) */
   src?: string
+  /** WebM version of src (smaller); listed first so browsers that support it use it */
+  srcWebm?: string
   poster?: string
   featured?: boolean
   title?: string

@@ -18,9 +18,9 @@ export const microcopy = {
   },
   highlights: {
     titleLines: ['See it', 'in action.'] as [string, string], // EDITABLE
-    intro: 'Short screen recordings of the projects above, captured from the running builds.', // EDITABLE
+    intro: 'Short scroll-throughs of the projects above, captured from the live builds.', // EDITABLE
     onView: 'On view',
-    footer: ['Project walkthroughs', 'Screen recordings'] as [string, string],
+    footer: ['Project walkthroughs', 'Captured from live builds'] as [string, string],
     pending: 'Recording coming soon',
   },
   experience: { left: 'Experience & Recognition', right: '(2024—Now)' },

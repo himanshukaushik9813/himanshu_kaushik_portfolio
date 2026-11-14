@@ -73,7 +73,7 @@ export function ProjectArtTile({ project, index }: { project: Project; index: nu
 
 export function ProjectShot({ project }: { project: Project }) {
   if (project.screenshot) {
-    return <img className="project-shot" src={project.screenshot} alt={`${project.title} screenshot`} width={1080} height={1350} loading="lazy" decoding="async" />
+    return <img className="project-shot" src={project.screenshot} alt={`${project.title} screenshot`} width={720} height={1558} loading="lazy" decoding="async" />
   }
   return (
     <div className="project-shot project-shot--pending" style={{ background: `var(--p${project.accentSlot}-soft)`, color: `var(--p${project.accentSlot}-ink)` }}>
