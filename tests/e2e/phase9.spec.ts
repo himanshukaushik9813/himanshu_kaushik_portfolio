@@ -89,15 +89,15 @@ test.describe('9 entry mid-page (prerendered anchors)', () => {
     expect(errors).toEqual([])
   })
 
-  test('reloading halfway down restores the position without errors', async ({ page }) => {
+  test('reloading halfway down starts over at the top with the intro, without errors', async ({ page }) => {
     const errors = watchErrors(page)
-    await page.goto('/')
-    await page.waitForTimeout(1500)
-    await page.evaluate(() => scrollTo(0, 12000))
-    await page.waitForTimeout(800)
+    await page.goto('/#skills')
+    await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(1000)
     await page.reload()
-    await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(11000)
-    await expect(page.locator('[data-section="skills"]')).toHaveCount(1)
+    await page.waitForTimeout(2000)
+    expect(await page.evaluate(() => scrollY)).toBe(0)
+    await expect(page).not.toHaveURL(/#/)
+    await expect(page.locator('.intro__title')).toBeVisible()
     expect(errors).toEqual([])
   })
 })
